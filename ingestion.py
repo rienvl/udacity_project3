@@ -67,7 +67,6 @@ def merge_multiple_dataframe():
 
     # test output file
     # Open a list of previous scores, using the ast module:
-    files_list = []
     with open(full_path_out) as f:
         files_list = f.readlines()
 
