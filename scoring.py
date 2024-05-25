@@ -50,8 +50,7 @@ def score_model(model, test_data):
 
 if __name__ == '__main__':
     # load deployed model from model_path specified in config
-    model_path = os.path.join(config['output_model_path'])
-    full_model_path = os.path.join(model_path, 'trainedmodel.pkl')
+    full_model_path = os.path.join(config['output_model_path'], 'trainedmodel.pkl')
     with open(full_model_path, 'rb') as file:
         model = pickle.load(file)
     logging.info("OK - main: loaded model".format(full_model_path))
