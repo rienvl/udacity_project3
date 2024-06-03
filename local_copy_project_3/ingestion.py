@@ -35,7 +35,7 @@ def merge_multiple_dataframe():
             if final_dataframe is None:
                 final_dataframe = current_df
             else:
-                final_dataframe.append(current_df).reset_index(drop=True)
+                final_dataframe = pd.concat([final_dataframe, current_df], ignore_index=True).reset_index(drop=True)
 
             # add full csv file name to all_csv_files_list
             all_csv_files_list.append(full_path)
@@ -44,13 +44,13 @@ def merge_multiple_dataframe():
 
     # remove duplicates from dataframe
     output_df = final_dataframe.drop_duplicates()
-    logging.info("OK ingestion.py: dataset after de-dupe contains {} unique rows".format(output_df.shape[0]))
+    logging.info("OK - ingestion.py: dataset after de-dupe contains {} unique rows".format(output_df.shape[0]))
 
     # write merged dataframe to an output file
     output_dir = os.path.join(os.getcwd(), output_folder_path)
     full_path_out = os.path.join(output_dir, 'finaldata.csv')
-    output_df.to_csv(full_path_out)
-    logging.info("OK ingestion.py: dataset save in {}".format(full_path_out))
+    output_df.to_csv(full_path_out, index=False)
+    logging.info("OK - ingestion.py: dataset save in {}".format(full_path_out))
 
     # store a record of all combined .csv files in a file called ingestedfiles.txt
     # get a current timestamp
@@ -63,7 +63,7 @@ def merge_multiple_dataframe():
             # all_records = [sourcelocation, filename, len(data.index), the_time_now]
             f.write(f"{full_file_name}\n")
 
-    logging.info("OK ingestion.py: record of all .csv files stored in {}".format(full_path_out))
+    logging.info("OK - ingestion.py: record of all .csv files stored in {}".format(full_path_out))
 
     # test output file
     # Open a list of previous scores, using the ast module:
