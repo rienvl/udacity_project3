@@ -15,6 +15,7 @@ logger = logging.getLogger()
 with open('config.json','r') as f:
     config = json.load(f) 
 
+full_model_path = os.path.join(config['prod_deployment_path'], 'trainedmodel.pkl')
 dataset_csv_path = os.path.join(config['output_folder_path']) 
 test_data_path = os.path.join(config['test_data_path']) 
 
@@ -27,7 +28,6 @@ def model_predictions(test_data_df):
     :return: model predictions, list of length equal to number of rows in the input dataset
     """
     # read the deployed model
-    full_model_path = os.path.join(config['prod_deployment_path'], 'trainedmodel.pkl')
     with open(full_model_path, 'rb') as file:
         model = pickle.load(file)
     logging.info("OK - model_predictions.py: loaded model from {}".format(full_model_path))
