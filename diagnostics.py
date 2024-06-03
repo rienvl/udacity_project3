@@ -28,7 +28,8 @@ def model_predictions(test_data_df):
 
     # calculate predictions
     X = test_data_df.loc[:, ['lastmonth_activity', 'lastyear_activity', 'number_of_employees']].values.reshape(-1, 3)
-    predictions_list = model.predict(X)
+    predictions = model.predict(X)
+    predictions_list = predictions.tolist()
     logging.info("OK - model_predictions.py: derived model predictions (length={})".format(len(predictions_list)))
 
     return predictions_list  # return value should be a list containing all predictions
