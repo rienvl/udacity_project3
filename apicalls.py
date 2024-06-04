@@ -1,4 +1,3 @@
-import subprocess  # for some reason requests.get is not working --> use subprocess.run using curl instead
 import requests
 import os
 import json
@@ -6,6 +5,7 @@ import json
 
 # Specify a URL that resolves to your workspace
 URL = 'http://127.0.0.1'
+URL = 'http://0.0.0.0'
 
 with open('config.json','r') as f:
     config = json.load(f)
@@ -42,3 +42,4 @@ print('combined responses = {}'.format(responses))
 full_output_path = os.path.join(output_path, 'apireturns.txt')
 with open(full_output_path, 'w') as file:
     file.write(json.dumps(responses))
+print('OK - apicalls completed')

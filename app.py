@@ -19,7 +19,7 @@ with open('config.json', 'r') as f:
     config = json.load(f) 
 
 dataset_csv_path = os.path.join(config['output_folder_path'])
-full_model_path = os.path.join(config['prod_deployment_path'], 'trainedmodel.pkl')
+model_path = os.path.join(config['prod_deployment_path'])
 
 prediction_model = None
 
@@ -44,6 +44,7 @@ def prediction():
 @app.route("/scoring", methods=['GET','OPTIONS'])
 def scoring():
     # load deployed model from model_path specified in config
+    full_model_path = os.path.join(model_path, 'trainedmodel.pkl')
     print('loading model from {}'.format(full_model_path))
     with open(full_model_path, 'rb') as file:
         model = pickle.load(file)

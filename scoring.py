@@ -17,8 +17,7 @@ logger = logging.getLogger()
 with open('config.json', 'r') as f:
     config = json.load(f) 
 
-full_model_path = os.path.join(config['prod_deployment_path'], 'trainedmodel.pkl')
-dataset_csv_path = os.path.join(config['output_folder_path']) 
+output_model_path = os.path.join(config['output_model_path'])
 test_data_path = os.path.join(config['test_data_path'])
 
 
@@ -51,7 +50,7 @@ def score_model(model):
     logging.info("OK - scoring.py: calculated F1 score = {:.2f}".format(f1_score))
 
     # write the result to the latestscore.txt file
-    full_output_path = os.path.join(dataset_csv_path, 'latestscore.txt')
+    full_output_path = os.path.join(output_model_path, 'latestscore.txt')
     with open(full_output_path, "w") as text_file:
         text_file.write("%s" % f1_score)
     logging.info("OK - scoring.py: F1 score data saved to {}".format(full_output_path))
@@ -61,7 +60,7 @@ def score_model(model):
 
 if __name__ == '__main__':
     # load deployed model from model_path specified in config
-    full_model_path = os.path.join(config['output_model_path'], 'trainedmodel.pkl')
+    full_model_path = os.path.join(output_model_path, 'trainedmodel.pkl')
     with open(full_model_path, 'rb') as file:
         model = pickle.load(file)
     logging.info("OK - main: loaded model".format(full_model_path))

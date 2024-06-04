@@ -16,7 +16,7 @@ with open('config.json','r') as f:
     config = json.load(f) 
 
 full_model_path = os.path.join(config['prod_deployment_path'], 'trainedmodel.pkl')
-dataset_csv_path = os.path.join(config['output_folder_path']) 
+output_folder_path = os.path.join(config['output_folder_path']) 
 test_data_path = os.path.join(config['test_data_path']) 
 
 
@@ -44,8 +44,8 @@ def model_predictions(test_data_df):
 # Function to get summary statistics
 def dataframe_summary():
     # load the dataset from output_path
-    full_test_data_path = os.path.join(dataset_csv_path, 'finaldata.csv')
-    data_df = pd.read_csv(full_test_data_path)
+    full_data_path = os.path.join(output_folder_path, 'finaldata.csv')
+    data_df = pd.read_csv(full_data_path)
     logging.info("OK - diagnostics.py - loaded dataframe with {} rows".format(data_df.shape[0]))
 
     # calculate summary statistics for all columns with numeric data
@@ -69,7 +69,7 @@ def dataframe_summary():
 
 def missing_data():
     # load the dataset from output_path
-    full_test_data_path = os.path.join(dataset_csv_path, 'finaldata.csv')
+    full_test_data_path = os.path.join(output_folder_path, 'finaldata.csv')
     data_df = pd.read_csv(full_test_data_path)
     n_rows = data_df.shape[0]
     logging.info("OK - diagnostics.py - loaded dataframe with {} rows".format(n_rows))

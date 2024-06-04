@@ -17,8 +17,8 @@ logger = logging.getLogger()
 with open('config.json','r') as f:
     config = json.load(f) 
 
-model_path = os.path.join(config['output_model_path'])
-dataset_csv_path = os.path.join(config['output_folder_path'])
+output_model_path = os.path.join(config['output_model_path'])
+output_folder_path = os.path.join(config['output_folder_path'])
 prod_deployment_path = os.path.join(config['prod_deployment_path']) 
 
 
@@ -30,19 +30,19 @@ def store_model_into_pickle():
     """
     # target: the deployment directory
     # copy the latest pickle file
-    full_source_path = os.path.join(model_path, 'trainedmodel.pkl')
+    full_source_path = os.path.join(output_model_path, 'trainedmodel.pkl')
     full_destination_path = os.path.join(prod_deployment_path, 'trainedmodel.pkl')
     os.system("cp {} {}".format(full_source_path, full_destination_path))
     logging.info("OK - deployment.py: copied {} to {}".format(full_source_path, full_destination_path))
 
     # copy the latestscore.txt value
-    full_source_path = os.path.join(dataset_csv_path, 'latestscore.txt')
+    full_source_path = os.path.join(output_model_path, 'latestscore.txt')
     full_destination_path = os.path.join(prod_deployment_path, 'latestscore.txt')
     os.system("cp {} {}".format(full_source_path, full_destination_path))
     logging.info("OK - deployment.py: copied {} to {}".format(full_source_path, full_destination_path))
 
     # copy the ingestedfiles.txt file
-    full_source_path = os.path.join(dataset_csv_path, 'ingestedfiles.txt')
+    full_source_path = os.path.join(output_folder_path, 'ingestedfiles.txt')
     full_destination_path = os.path.join(prod_deployment_path, 'ingestedfiles.txt')
     os.system("cp {} {}".format(full_source_path, full_destination_path))
     logging.info("OK - deployment.py: copied {} to {}".format(full_source_path, full_destination_path))
