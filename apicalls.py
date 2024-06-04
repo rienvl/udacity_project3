@@ -13,6 +13,7 @@ with open('config.json','r') as f:
 output_path = os.path.join(config['output_model_path'])
 
 # Call each API endpoint and store the responses
+# response1 = requests.post(URL + ':8000/prediction?filename=./testdata/testdata.csv').content  # returns list predictions
 response1 = requests.post(URL + ':8000/prediction?filename=~/git/udacity_project3/testdata/testdata.csv').content  # returns list predictions
 response2 = requests.get(URL + ':8000/scoring').content  # returns f1_score
 response3 = requests.get(URL + ':8000/summarystats').content  # returns percentage_of_na for each num. column
