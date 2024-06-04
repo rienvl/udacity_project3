@@ -20,7 +20,7 @@ with open('config.json','r') as f:
     config = json.load(f) 
 
 # dataset_csv_path = os.path.join(config['output_folder_path'])  # confusing name: data should come from test_data_path
-output_path = os.path.join(config['output_folder_path'])  # confusing name: data should come from test_data_path
+output_model_path = os.path.join(config['output_model_path'])  # confusing name: data should come from test_data_path
 test_data_path = os.path.join(config['test_data_path'])
 
 
@@ -46,7 +46,7 @@ def score_model():
     # plt.show()
 
     # write the confusion matrix to the workspace
-    full_output_path = os.path.join(output_path, 'confusionmatrix.png')
+    full_output_path = os.path.join(output_model_path, 'confusionmatrix.png')
     plt.savefig(full_output_path)
     logging.info("OK - reporting.py: saved plot confusion matrix to {}".format(full_output_path))
 
