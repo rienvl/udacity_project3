@@ -4,7 +4,7 @@ import json
 
 
 # Specify a URL that resolves to your workspace
-URL = 'http://127.0.0.1'
+# URL = 'http://127.0.0.1'
 URL = 'http://0.0.0.0'
 
 with open('config.json','r') as f:
